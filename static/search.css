@@ -1,0 +1,73 @@
+
+.body {
+    background-color: #2c3e50;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+
+.search_input,
+.result_list {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+
+.search_input:hover {
+    border-color: #3c69bd;
+}
+
+
+.search_button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    margin-left: 10px;
+}
+
+
+.back_btn,
+.data_add_btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+}
+
+
+.search_button:hover,
+.data_add_btn:hover,
+.back_btn:hover {
+    background-color: #2980b9;
+}
+
+
+.results_table {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.results_table QHeaderView::section {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.results_table QTableWidget::item {
+    padding: 10px;
+}

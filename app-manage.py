@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QGraphicsDropShadowEffect, QGridLayout, QLineEdit, QComboBox, QTextEdit, QHBoxLayout, QTableWidget, QHeaderView, QTableWidgetItem
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QGraphicsDropShadowEffect, QGridLayout, QLineEdit, QComboBox, QTextEdit, QHBoxLayout, QListWidget
 from PyQt6.QtCore import Qt
 
 
@@ -155,11 +155,78 @@ class DataManage(QWidget):
             stylesheet = file.read()
         self.setStyleSheet(stylesheet)
 
+#------------------------------------------
+
+class SearchManage(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        self.searchUI()
+        self.applyStylesheet("static/search.css")
+
+    def searchUI(self):
+        search_main_layout = QVBoxLayout()
+
+        search_layout = QHBoxLayout()
+
+        self.search_input = QLineEdit()
+        self.addShadow(self.search_input)
+        self.search_input.setPlaceholderText("جستجو...")
+        self.search_input.setProperty('class', 'search_input')
+        search_layout.addWidget(self.search_input)
+
+        search_button = QPushButton("جستجو")
+        self.addShadow(search_button)
+        search_button.setProperty('class', 'search_button')
+        search_layout.addWidget(search_button)
+
+        search_main_layout.addLayout(search_layout)
+
+        result_list = QListWidget()
+        result_list.setProperty('class', 'result_list')
+        self.addShadow(result_list)
+        search_main_layout.addWidget(result_list)
+
+        footer_layout = QGridLayout()
+
+        data_add_btn = QPushButton("افزودن اطلاعات")
+        self.addShadow(data_add_btn)
+        data_add_btn.setProperty('class', 'data_add_btn')
+        footer_layout.addWidget(data_add_btn, 0, 0)
+
+        back_btn = QPushButton("back")
+        back_btn.setProperty('class', 'back_btn')
+        self.addShadow(back_btn)
+        footer_layout.addWidget(back_btn, 0, 2)
+
+        search_main_layout.addLayout(footer_layout)
+
+        self.setLayout(search_main_layout)
+
+    def addShadow(self, widget):
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(10)
+        shadow.setColor(Qt.GlobalColor.black)
+        shadow.setOffset(2, 2)
+
+        widget.setGraphicsEffect(shadow)
+
+    def initUI(self):
+        self.setProperty('class', 'body')
+        self.setWindowTitle("صفحه جستجو")
+        self.setGeometry(100, 100, 300, 600)
+
+    def applyStylesheet(self, filename):
+        with open(filename, "r") as file:
+            stylesheet = file.read()
+        self.setStyleSheet(stylesheet)
 
 if __name__ == "__main__":
     app = QApplication([])
     index_manage = IndexManage()
     data_manage = DataManage()
-    index_manage.show()
-    data_manage.show()
+    search_manage = SearchManage()
+    # index_manage.show()
+    # data_manage.show()
+    search_manage.show()
     app.exec()
