@@ -1,0 +1,71 @@
+
+.body {
+  background-color: #2c3e50;
+  font-family: 'Arial', sans-serif;
+  color: white;
+}
+
+
+.file_input {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  margin-bottom: 20px;
+}
+
+
+.back-btn,
+.save-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+}
+
+
+.file_input:hover,
+.back-btn:hover,
+.save-btn:hover {
+  background-color: #2980b9;
+}
+
+
+.controler_label,
+.model_control_label,
+.title_label,
+.descriotion_label {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+
+.controler_input {
+  color: white;
+  background-color: #3498db;
+  padding: 5px;
+  border: 3px solid #3498db;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+.model_controler_input,
+.descriotion_input,
+.title_input {
+  background-color: white;
+  padding: 5px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

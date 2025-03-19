@@ -66,8 +66,100 @@ class IndexManage(QWidget):
         shadow.setOffset(5, 5)
         widget.setGraphicsEffect(shadow)
 
+# -----------------------------------------------
+
+class DataManage(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        self.dataUI()
+        self.applyStylesheet("static/data.css")
+
+    def dataUI(self):
+        main_layout = QVBoxLayout()
+
+        file_input = QPushButton("انتخاب فایل")
+        self.addShadow(file_input)
+        file_input.setProperty('class', 'file_input')
+        main_layout.addWidget(file_input)
+
+        field_layout = QGridLayout()
+        field_layout.setProperty('class', 'field_layout')
+
+        controler_input = QComboBox()
+        self.addShadow(controler_input)
+        controler_input.setProperty('class', 'controler_input')
+        controler_label = QLabel("کنترلر:")
+        self.addShadow(controler_label)
+        controler_label.setProperty('class', 'controler_label')
+        controler_input.addItem("فانوک")
+        controler_input.addItem("زیمنس")
+        field_layout.addWidget(controler_label, 0, 1)
+        field_layout.addWidget(controler_input, 0, 0)
+
+        model_controler_input = QLineEdit()
+        self.addShadow(model_controler_input)
+        model_controler_input.setProperty('class', 'model_controler_input')
+        model_controler_label = QLabel("مدل کنترلر:")
+        self.addShadow(model_controler_label)
+        model_controler_label.setProperty('class', 'model_control_label')
+        field_layout.addWidget(model_controler_label, 1, 1)
+        field_layout.addWidget(model_controler_input, 1, 0)
+
+        title_label = QLabel("عنوان:")
+        self.addShadow(title_label)
+        title_label.setProperty('class', 'title_label')
+        title_input = QLineEdit()
+        self.addShadow(title_input)
+        title_input.setProperty('class', 'title_input')
+        field_layout.addWidget(title_label, 2, 1)
+        field_layout.addWidget(title_input, 2, 0)
+
+        descriotion_label = QLabel("توضیحات:")
+        self.addShadow(descriotion_label)
+        descriotion_label.setProperty('class', 'descriotion_label')
+        descriotion_input = QTextEdit()
+        self.addShadow(descriotion_input)
+        descriotion_input.setProperty('class', 'descriotion_input')
+        field_layout.addWidget(descriotion_label, 3, 1)
+        field_layout.addWidget(descriotion_input, 3, 0)
+
+        save_btn = QPushButton("save")
+        self.addShadow(save_btn)
+        save_btn.setProperty('class', 'save-btn')
+        field_layout.addWidget(save_btn)
+
+        back_btn = QPushButton("back")
+        self.addShadow(back_btn)
+        back_btn.setProperty('class', 'back-btn')
+        field_layout.addWidget(back_btn)
+
+        self.setLayout(main_layout)
+        main_layout.addLayout(field_layout)
+
+    def addShadow(self, widget):
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(15)
+        shadow.setColor(Qt.GlobalColor.black)
+        shadow.setOffset(5, 5)
+
+        widget.setGraphicsEffect(shadow)
+
+    def initUI(self):
+        self.setProperty('class', 'body')
+        self.setWindowTitle("Add Data")
+        self.setGeometry(100, 100, 300, 600)
+
+    def applyStylesheet(self, filename):
+        with open(filename, "r") as file:
+            stylesheet = file.read()
+        self.setStyleSheet(stylesheet)
+
+
 if __name__ == "__main__":
     app = QApplication([])
     index_manage = IndexManage()
+    data_manage = DataManage()
     index_manage.show()
+    data_manage.show()
     app.exec()
