@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QGraphicsDropShadowEffect, QGridLayout, QLineEdit, QComboBox, QTextEdit, QHBoxLayout, QListWidget
+from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QGraphicsDropShadowEffect, QGridLayout, QLineEdit, QComboBox, QTextEdit, QHBoxLayout, QListWidget, QFileDialog
 from PyQt6.QtCore import Qt
 
 
@@ -17,21 +17,25 @@ class IndexManage(QWidget):
         menu_search.setProperty('class', 'menu_button')
         self.addShadow(menu_search)
         menu_layout.addWidget(menu_search, alignment=Qt.AlignmentFlag.AlignCenter)
+        menu_search.clicked.connect(IndexManage.search_show)
 
         menu_add = QPushButton("Add")
         menu_add.setProperty('class', 'menu_button')
         self.addShadow(menu_add)
         menu_layout.addWidget(menu_add, alignment=Qt.AlignmentFlag.AlignCenter)
+        menu_add.clicked.connect(IndexManage.data_show)
 
         menu_setting = QPushButton("Setting (گشادیم میشه)")
         menu_setting.setProperty('class', 'menu_button')
         self.addShadow(menu_setting)
         menu_layout.addWidget(menu_setting, alignment=Qt.AlignmentFlag.AlignCenter)
+        menu_setting.clicked.connect(IndexManage.setting_show)
 
         menu_exit = QPushButton("Exit")
         menu_exit.setProperty('class', 'menu_button')
         self.addShadow(menu_exit)
         menu_layout.addWidget(menu_exit, alignment=Qt.AlignmentFlag.AlignCenter)
+        menu_exit.clicked.connect(IndexManage.exit_app)
 
         menu_layout.addStretch()
 
@@ -66,6 +70,20 @@ class IndexManage(QWidget):
         shadow.setOffset(5, 5)
         widget.setGraphicsEffect(shadow)
 
+    def exit_app(self):
+        index_manage.close()
+
+    def data_show(self):
+        index_manage.close()
+        data_manage.show()
+    
+    def search_show(self):
+        index_manage.close()
+        search_manage.show()
+    
+    def setting_show(self):
+        pass
+
 # -----------------------------------------------
 
 class DataManage(QWidget):
@@ -82,6 +100,7 @@ class DataManage(QWidget):
         self.addShadow(file_input)
         file_input.setProperty('class', 'file_input')
         main_layout.addWidget(file_input)
+        file_input.clicked.connect(DataManage.chose_file_show)
 
         field_layout = QGridLayout()
         field_layout.setProperty('class', 'field_layout')
@@ -128,11 +147,13 @@ class DataManage(QWidget):
         self.addShadow(save_btn)
         save_btn.setProperty('class', 'save-btn')
         field_layout.addWidget(save_btn)
+        save_btn.clicked.connect(DataManage.save)
 
         back_btn = QPushButton("back")
         self.addShadow(back_btn)
         back_btn.setProperty('class', 'back-btn')
         field_layout.addWidget(back_btn)
+        back_btn.clicked.connect(DataManage.back_index)
 
         self.setLayout(main_layout)
         main_layout.addLayout(field_layout)
@@ -154,6 +175,16 @@ class DataManage(QWidget):
         with open(filename, "r") as file:
             stylesheet = file.read()
         self.setStyleSheet(stylesheet)
+
+    def back_index(self):
+        data_manage.close()
+        index_manage.show()
+
+    def save(self):
+        pass
+
+    def chose_file_show(self):
+        pass
 
 #------------------------------------------
 
@@ -193,11 +224,13 @@ class SearchManage(QWidget):
         self.addShadow(data_add_btn)
         data_add_btn.setProperty('class', 'data_add_btn')
         footer_layout.addWidget(data_add_btn, 0, 0)
+        data_add_btn.clicked.connect(SearchManage.data_show)
 
         back_btn = QPushButton("back")
         back_btn.setProperty('class', 'back_btn')
         self.addShadow(back_btn)
         footer_layout.addWidget(back_btn, 0, 2)
+        back_btn.clicked.connect(SearchManage.back_index)
 
         search_main_layout.addLayout(footer_layout)
 
@@ -221,12 +254,18 @@ class SearchManage(QWidget):
             stylesheet = file.read()
         self.setStyleSheet(stylesheet)
 
+    def back_index(self):
+        search_manage.close()
+        index_manage.show()
+
+    def data_show(self):
+        search_manage.close()
+        data_manage.show()
+
 if __name__ == "__main__":
     app = QApplication([])
     index_manage = IndexManage()
     data_manage = DataManage()
     search_manage = SearchManage()
     index_manage.show()
-    data_manage.show()
-    search_manage.show()
     app.exec()
